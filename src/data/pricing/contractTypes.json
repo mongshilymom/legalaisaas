@@ -1,0 +1,36 @@
+[
+  {
+    "id": "basic",
+    "name": "기본 계약서",
+    "price": 0,
+    "features": [
+      "간단한 계약",
+      "AI 초안 작성"
+    ],
+    "stripePriceId": null
+  },
+  {
+    "id": "premium",
+    "name": "프리미엄 계약서",
+    "price": 19000,
+    "features": [
+      "리스크 분석",
+      "보안 인증",
+      "PDF 다운로드",
+      "다국어 지원"
+    ],
+    "stripePriceId": "price_abc123"
+  },
+  {
+    "id": "enterprise",
+    "name": "엔터프라이즈 계약서",
+    "price": 99000,
+    "features": [
+      "리스크 평가 리포트",
+      "글로벌 규제 대응",
+      "AI 컨설팅",
+      "커스터마이징"
+    ],
+    "stripePriceId": "price_xyz456"
+  }
+]

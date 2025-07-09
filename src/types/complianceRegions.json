@@ -1,0 +1,14 @@
+{
+  "EU": {
+    "name": "GDPR (EU)",
+    "requiredClauses": ["데이터 처리 목적", "보관 기간", "동의 철회 권리", "정보 접근 권한"]
+  },
+  "US": {
+    "name": "CCPA (California)",
+    "requiredClauses": ["개인정보 수집 고지", "동의 거부 옵션", "데이터 삭제 요청 권리"]
+  },
+  "KR": {
+    "name": "PIPA (Korea)",
+    "requiredClauses": ["수집 목적", "제3자 제공", "보관 및 파기", "고지 의무"]
+  }
+}

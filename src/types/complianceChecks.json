@@ -1,0 +1,18 @@
+[
+  {
+    "label": "계약 당사자 정보 명확성",
+    "status": "pass"
+  },
+  {
+    "label": "계약 목적과 범위 기술",
+    "status": "warning"
+  },
+  {
+    "label": "분쟁 해결 조항 포함 여부",
+    "status": "fail"
+  },
+  {
+    "label": "계약 기간 및 종료 조건",
+    "status": "pass"
+  }
+]

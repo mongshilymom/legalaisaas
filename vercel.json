@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/cron/daily-send.ts": {
+      "runtime": "edge"
+    }
+  },
+  "cron": [
+    {
+      "path": "/api/cron/daily-send",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

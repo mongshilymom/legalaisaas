@@ -1,0 +1,10 @@
+Generated Files
+features/payment/stripe.ts
+features/payment/toss.ts
+features/payment/UnifiedPayment.tsx
+features/payment/PaymentOption.tsx
+api/payment/stripe-session.ts
+api/payment/toss-confirm.ts
+api/payment/toss-webhook.ts
+pages/payment/success.tsx
+pages/payment/fail.tsx

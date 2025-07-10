@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'react-i18next';
-import { Check, X, Star, Zap, Bot, ArrowRight, TrendingUp, Shield, Target } from 'lucide-react';
+import { Check, X, Star, Zap, Bot, ArrowRight, TrendingUp, Shield, Target, Gift } from 'lucide-react';
+import { logUserAction } from '../lib/logUserAction';
 
 interface PlanRecommendation {
   recommended_plan: string;
@@ -41,6 +42,7 @@ const PricingPage: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [recommendation, setRecommendation] = useState<PlanRecommendation | null>(null);
   const [selectedPlan, setSelectedPlan] = useState<string>('pro');
+  const [seoSource, setSeoSource] = useState<string | null>(null);
 
   const plans: Plan[] = [
     {
@@ -106,6 +108,26 @@ const PricingPage: NextPage = () => {
     }
   ];
 
+  // Check for SEO source and track visit
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmSource = urlParams.get('utm_source');
+    const seoTag = urlParams.get('seo_tag');
+    
+    if (utmSource === 'seo' || seoTag || document.referrer.includes('google.') || document.referrer.includes('naver.')) {
+      const tag = seoTag || 'pricing.general';
+      setSeoSource(tag);
+      
+      logUserAction({
+        type: 'SEO_VISITOR',
+        page: '/pricing',
+        tag: tag,
+        userId: session?.user?.id,
+        source: 'seo'
+      });
+    }
+  }, [session]);
+
   // Fetch AI recommendation for logged-in users
   useEffect(() => {
     if (session?.user) {
@@ -138,6 +160,18 @@ const PricingPage: NextPage = () => {
     if (!session?.user) {
       window.location.href = '/auth/signin';
       return;
+    }
+
+    // Track CTA click for SEO visitors
+    if (seoSource) {
+      logUserAction({
+        type: 'CTA_CLICK',
+        page: '/pricing',
+        tag: seoSource,
+        userId: session?.user?.id,
+        source: 'seo',
+        metadata: { plan: planId }
+      });
     }
 
     try {
@@ -206,6 +240,39 @@ const PricingPage: NextPage = () => {
         </nav>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* SEO CTA Banner */}
+          {seoSource && (
+            <div className="mb-8">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-6 text-white text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <Gift className="h-6 w-6 mr-2" />
+                  <h2 className="text-xl font-bold">
+                    {i18n.language === 'ko' ? '🎉 특별 SEO 방문자 혜택!' :
+                     i18n.language === 'ja' ? '🎉 特別SEO訪問者特典！' :
+                     i18n.language === 'zh' ? '🎉 特别SEO访客优惠！' :
+                     '🎉 Special SEO Visitor Offer!'}
+                  </h2>
+                </div>
+                <p className="text-green-100 mb-4">
+                  {i18n.language === 'ko' ? '검색을 통해 찾아주셔서 감사합니다! 지금 업그레이드하면 첫 달 50% 할인 혜택을 받으세요.' :
+                   i18n.language === 'ja' ? '検索からお越しいただきありがとうございます！今すぐアップグレードすると初月50%割引！' :
+                   i18n.language === 'zh' ? '感谢您通过搜索找到我们！立即升级享受首月50%折扣！' :
+                   'Thanks for finding us through search! Upgrade now for 50% off your first month.'}
+                </p>
+                <button
+                  onClick={() => handleSelectPlan('pro')}
+                  className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors inline-flex items-center"
+                >
+                  {i18n.language === 'ko' ? '지금 업그레이드하기' :
+                   i18n.language === 'ja' ? '今すぐアップグレード' :
+                   i18n.language === 'zh' ? '立即升级' :
+                   'Upgrade Now'}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">

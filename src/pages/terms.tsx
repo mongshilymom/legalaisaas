@@ -2,10 +2,47 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { Shield, ArrowLeft } from 'lucide-react';
+import { Shield, ArrowLeft, Star, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { logUserAction } from '../lib/logUserAction';
 
 const TermsOfService: NextPage = () => {
   const { t, i18n } = useTranslation();
+  const { data: session } = useSession();
+  const [seoSource, setSeoSource] = useState<string | null>(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmSource = urlParams.get('utm_source');
+    const seoTag = urlParams.get('seo_tag');
+    
+    if (utmSource === 'seo' || seoTag || document.referrer.includes('google.') || document.referrer.includes('naver.')) {
+      const tag = seoTag || 'terms.general';
+      setSeoSource(tag);
+      
+      logUserAction({
+        type: 'SEO_VISITOR',
+        page: '/terms',
+        tag: tag,
+        userId: session?.user?.id,
+        source: 'seo'
+      });
+    }
+  }, [session]);
+
+  const handleCtaClick = () => {
+    if (seoSource) {
+      logUserAction({
+        type: 'CTA_CLICK',
+        page: '/terms',
+        tag: seoSource,
+        userId: session?.user?.id,
+        source: 'seo'
+      });
+    }
+    window.location.href = '/pricing';
+  };
 
   const getContent = () => {
     switch (i18n.language) {
@@ -261,6 +298,39 @@ const TermsOfService: NextPage = () => {
 
         {/* Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* SEO CTA Banner */}
+          {seoSource && (
+            <div className="mb-6">
+              <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-6 text-white text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <Star className="h-6 w-6 mr-2" />
+                  <h2 className="text-xl font-bold">
+                    {i18n.language === 'ko' ? '법률 AI 솔루션으로 컴플라이언스 강화하세요!' :
+                     i18n.language === 'ja' ? '法的AIソリューションでコンプライアンスを強化！' :
+                     i18n.language === 'zh' ? '用法律AI解决方案加强合规性！' :
+                     'Strengthen Compliance with Legal AI Solutions!'}
+                  </h2>
+                </div>
+                <p className="text-purple-100 mb-4">
+                  {i18n.language === 'ko' ? '약관 확인 중이시군요! 우리의 AI가 계약서 분석과 법률 준수를 자동화해드립니다.' :
+                   i18n.language === 'ja' ? '利用規約をご確認中ですね！私たちのAIが契約書分析と法的遵守を自動化します。' :
+                   i18n.language === 'zh' ? '您正在查看条款！我们的AI可以自动化合同分析和法律合规。' :
+                   'Checking our terms? Our AI automates contract analysis and legal compliance for you.'}
+                </p>
+                <button
+                  onClick={handleCtaClick}
+                  className="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors inline-flex items-center"
+                >
+                  {i18n.language === 'ko' ? '무료 체험 시작하기' :
+                   i18n.language === 'ja' ? '無料トライアルを開始' :
+                   i18n.language === 'zh' ? '开始免费试用' :
+                   'Start Free Trial'}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className="bg-white rounded-lg shadow-sm p-8">
             <div className="mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{content.title}</h1>

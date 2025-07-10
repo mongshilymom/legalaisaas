@@ -27,6 +27,10 @@
     {
       "path": "/api/cron/daily/send-growth-email",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/trigger-conversion-emails",
+      "schedule": "0 10 * * *"
     }
   ],
   "env": {

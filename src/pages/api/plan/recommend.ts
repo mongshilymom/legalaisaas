@@ -210,12 +210,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       timestamp: new Date().toISOString()
     });
 
-    res.status(200).json({
-      success: true,
-      data: recommendation,
-      usage_data: usageData,
-      generated_at: new Date().toISOString()
-    });
+    // Transform to frontend format
+    const response = {
+      recommendedPlan: recommendation.recommended_plan === 'pro' ? '프리미엄 플랜' : 
+                      recommendation.recommended_plan === 'enterprise' ? '엔터프라이즈 플랜' : '기본 플랜',
+      currentPlan: usageData.current_plan === 'pro' ? '프리미엄 플랜' : 
+                  usageData.current_plan === 'enterprise' ? '엔터프라이즈 플랜' : '기본 플랜',
+      reason: recommendation.ai_insights,
+      benefits: recommendation.upgrade_benefits,
+      costSavings: recommendation.cost_analysis.recommended_cost > recommendation.cost_analysis.current_cost ? 
+                  recommendation.cost_analysis.recommended_cost - recommendation.cost_analysis.current_cost : 0,
+      urgency: recommendation.confidence_score > 0.8 ? 'high' : 
+               recommendation.confidence_score > 0.6 ? 'medium' : 'low',
+      usageStats: {
+        contractsGenerated: usageData.contract_generations,
+        chatMessages: usageData.monthly_queries,
+        documentsAnalyzed: usageData.ai_analysis_count,
+        lastActiveDate: new Date().toISOString()
+      }
+    };
+
+    res.status(200).json(response);
 
   } catch (error) {
     console.error('Plan recommendation error:', error);

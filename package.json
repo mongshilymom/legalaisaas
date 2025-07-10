@@ -12,7 +12,9 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "type-check": "tsc --noEmit",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "translate": "npx ts-node src/scripts/TranslateAllKeys.ts",
+    "translate:report": "npx ts-node -e \"import('./src/scripts/TranslateAllKeys').then(m => new m.TranslationManager(process.env.ANTHROPIC_API_KEY || '').generateReport())\""
   },
   "dependencies": {
     "next": "^14.0.0",

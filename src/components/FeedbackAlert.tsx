@@ -12,7 +12,7 @@ export const FeedbackAlert = ({ type, message }: FeedbackProps) => {
   };
 
   return (
-    <div className={\`\${styles[type]} p-3 rounded mt-4 text-sm\`}>
+    <div className={`${styles[type]} p-3 rounded mt-4 text-sm`}>
       {message}
     </div>
   );

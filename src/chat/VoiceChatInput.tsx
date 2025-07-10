@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useVoiceRecognition } from './useVoiceRecognition';
+import { useVoiceRecognition } from '../hooks/useVoiceRecognition';
 
 interface Props {
   onVoiceInputComplete: (text: string) => void;

@@ -4,35 +4,35 @@ import { useState } from 'react';
 function generateMultilangEmailContent(email: string, plan: string, lang: string) {
   switch (lang) {
     case 'en':
-      return \`
+      return `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <h2>Hello, <strong>\${email}</strong>!</h2>
-          <p>✅ Your <strong>\${plan}</strong> plan has been successfully activated.</p>
+          <h2>Hello, <strong>${email}</strong>!</h2>
+          <p>✅ Your <strong>${plan}</strong> plan has been successfully activated.</p>
           <p>💼 Enjoy enhanced legal support with Legal AI Pro.</p>
           <br/>
           <p style="color: #888;">Thank you.<br/>- Legal AI Pro Team</p>
         </div>
-      \`;
+      `;
     case 'ja':
-      return \`
+      return `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <h2>\${email} 様、こんにちは！</h2>
-          <p>✅ <strong>\${plan}</strong> プランが正常に適用されました。</p>
+          <h2>${email} 様、こんにちは！</h2>
+          <p>✅ <strong>${plan}</strong> プランが正常に適用されました。</p>
           <p>💼 Legal AI Pro でさらに強力な法務サポートをご利用ください。</p>
           <br/>
           <p style="color: #888;">ありがとうございます。<br/>- Legal AI Pro チーム</p>
         </div>
-      \`;
+      `;
     default:
-      return \`
+      return `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <h2>안녕하세요, <strong>\${email}</strong> 님!</h2>
-          <p>✅ <strong>\${plan}</strong> 요금제가 성공적으로 적용되었습니다.</p>
+          <h2>안녕하세요, <strong>${email}</strong> 님!</h2>
+          <p>✅ <strong>${plan}</strong> 요금제가 성공적으로 적용되었습니다.</p>
           <p>💼 Legal AI Pro 서비스를 통해 더 강력한 법률 지원을 경험하세요.</p>
           <br/>
           <p style="color: #888;">감사합니다.<br/>- Legal AI Pro Team</p>
         </div>
-      \`;
+      `;
   }
 }
 

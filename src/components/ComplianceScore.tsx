@@ -1,4 +1,4 @@
-import { useComplianceScore } from './useComplianceScore';
+import { useComplianceScore } from '../hooks/useComplianceScore';
 
 interface ComplianceCheck {
   label: string;

@@ -118,8 +118,7 @@ async function cacheInvalidationExample() {
         }
       }
     ],
-    isActive: true,
-    triggerCount: 0
+    isActive: true
   });
 
   // Get trigger statistics
@@ -227,9 +226,9 @@ async function productionCacheStrategyExample() {
         requestType: 'strategic-report',
         contractType: '근로계약서',
         language: 'ko',
-        priority: 'high'
+        priority: 'high' as const
       },
-      schedule: { frequency: 'daily', time: '08:00' }
+      schedule: { frequency: 'daily' as const, time: '08:00' }
     },
     {
       id: 'prod_service_basic',
@@ -238,9 +237,9 @@ async function productionCacheStrategyExample() {
         requestType: 'strategic-report',
         contractType: '용역계약서',
         language: 'ko',
-        priority: 'high'
+        priority: 'high' as const
       },
-      schedule: { frequency: 'daily', time: '08:05' }
+      schedule: { frequency: 'daily' as const, time: '08:05' }
     },
     {
       id: 'prod_compliance_check',

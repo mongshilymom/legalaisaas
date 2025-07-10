@@ -1,0 +1,43 @@
+{
+  "url": "https://legalaisaas.com/pricing",
+  "category": "product",
+  "language": "ko",
+  "title": "Legal AI SaaS 요금제 - AI 기반 법률 서비스 플랜 비교",
+  "description": "스타트업부터 대형 로펌까지, 맞춤형 AI 법률 자동화 요금제를 비교하고 선택하세요. 무료 체험부터 엔터프라이즈까지 다양한 옵션 제공.",
+  "keywords": [
+    "법률 AI 요금제",
+    "리갈테크 가격",
+    "AI 법률 서비스",
+    "계약서 자동화",
+    "법무 솔루션"
+  ],
+  "ogTitle": "Legal AI SaaS 요금제 - 당신의 법률 비서를 선택하세요",
+  "ogDescription": "AI 기반 법률 자동화로 업무 효율성을 극대화하세요. 다양한 요금제 옵션 확인하기.",
+  "twitterTitle": "Legal AI SaaS 요금제 안내",
+  "twitterDescription": "스타트업부터 엔터프라이즈까지, 맞춤형 AI 법률 서비스 요금제를 확인해보세요.",
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Legal AI SaaS 요금제",
+    "description": "AI 기반 법률 서비스 요금제 비교 페이지",
+    "url": "https://legalaisaas.com/pricing",
+    "inLanguage": "ko",
+    "about": {
+      "@type": "Thing",
+      "name": "법률 관련 서비스"
+    },
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Legal AI SaaS",
+      "description": "AI 기반 법률 서비스 플랫폼"
+    }
+  },
+  "recommendations": [
+    "제품별 요금제 비교표를 시각적으로 개선하세요",
+    "고객 후기 섹션을 추가하여 신뢰성을 높이세요",
+    "FAQ 섹션으로 일반적인 질문들을 해결하세요"
+  ],
+  "score": 88,
+  "timestamp": "2025-07-10T15:20:00+09:00",
+  "generatedBy": "Legal AI SaaS SEO System"
+}

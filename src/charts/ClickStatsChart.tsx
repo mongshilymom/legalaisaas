@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
 export default function ClickStatsChart() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Array<{ price: string; count: number }>>([]);
 
   const fetchData = async () => {
     const res = await fetch('/api/admin/price-stats');

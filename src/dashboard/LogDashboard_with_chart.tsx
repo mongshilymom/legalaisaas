@@ -7,8 +7,8 @@ import {
 
 export default function LogDashboard() {
   const { data: session, status } = useSession();
-  const [logs, setLogs] = useState([]);
-  const [chartData, setChartData] = useState([]);
+  const [logs, setLogs] = useState<Array<{ email: string; oldPlan: string; newPlan: string; changedAt: string }>>([]);
+  const [chartData, setChartData] = useState<Array<{ plan: string; count: number }>>([]);
   const [emailFilter, setEmailFilter] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -27,11 +27,11 @@ export default function LogDashboard() {
       setLogs(data.logs);
 
       // Count plans
-      const summary = data.logs.reduce((acc, log) => {
+      const summary = data.logs.reduce((acc: Record<string, number>, log: any) => {
         acc[log.newPlan] = (acc[log.newPlan] || 0) + 1;
         return acc;
       }, {});
-      setChartData(Object.entries(summary).map(([plan, count]) => ({ plan, count })));
+      setChartData(Object.entries(summary).map(([plan, count]) => ({ plan, count: count as number })));
     } catch (err) {
       setError('❌ 로그 불러오기 오류');
     }
@@ -69,7 +69,7 @@ export default function LogDashboard() {
     return <div className="p-6 text-center text-gray-500">로딩 중...</div>;
   }
 
-  if (!session || session.user.email !== 'admin@example.com') {
+  if (!session || !session.user?.email || session.user.email !== 'admin@example.com') {
     return (
       <div className="min-h-screen flex items-center justify-center text-red-500 text-xl">
         관리자만 접근 가능한 페이지입니다.

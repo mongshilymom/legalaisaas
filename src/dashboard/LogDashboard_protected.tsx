@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export default function LogDashboard() {
   const { data: session, status } = useSession();
-  const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState<Array<{ email: string; oldPlan: string; newPlan: string; changedAt: string }>>([]);
   const [emailFilter, setEmailFilter] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -35,7 +35,7 @@ export default function LogDashboard() {
     return <div className="p-6 text-center text-gray-500">로딩 중...</div>;
   }
 
-  if (!session || session.user.email !== 'admin@example.com') {
+  if (!session || !session.user?.email || session.user.email !== 'admin@example.com') {
     return (
       <div className="min-h-screen flex items-center justify-center text-red-500 text-xl">
         관리자만 접근 가능한 페이지입니다.

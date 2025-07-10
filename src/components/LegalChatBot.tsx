@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLegalChat } from './useLegalChat';
+import { useLegalChat } from '../hooks/useLegalChat';
 
 export const LegalChatBot = () => {
   const { messages, input, setInput, isLoading, handleSendMessage } = useLegalChat();

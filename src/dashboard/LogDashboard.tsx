@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function LogDashboard() {
-  const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState<Array<{ email: string; oldPlan: string; newPlan: string; changedAt: string }>>([]);
 
   useEffect(() => {
     // TODO: 실제 API 연동 필요

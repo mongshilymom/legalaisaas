@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFileAnalysis } from './useFileAnalysis';
+import { useFileAnalysis } from '../hooks/useFileAnalysis';
 
 export const FileAnalyzer = () => {
   const {

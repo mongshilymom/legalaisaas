@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import DOMPurify from 'dompurify';
 import { useCallback } from 'react';
-import { Button } from '@/components/ui/button'; // 예시 컴포넌트
+// import { Button } from '@/components/ui/button'; // 예시 컴포넌트
 import { useState } from 'react';
 
 interface AnalysisResult {
@@ -43,7 +43,7 @@ export const useDownloadContract = () => {
       const url = URL.createObjectURL(pdfBlob);
       const element = document.createElement('a');
       element.href = url;
-      element.download = \`\${sanitizeInput(fileName)}_계약서_\${new Date().toISOString().split('T')[0]}.pdf\`;
+      element.download = `${sanitizeInput(fileName)}_계약서_${new Date().toISOString().split('T')[0]}.pdf`;
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
@@ -72,7 +72,12 @@ export const ContractDownloadButton = ({ content, fileName }: { content: string;
 
   return (
     <div>
-      <Button onClick={() => downloadContract(content, fileName)}>📥 계약서 PDF 다운로드</Button>
+      <button 
+        onClick={() => downloadContract(content, fileName)}
+        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+      >
+        📥 계약서 PDF 다운로드
+      </button>
 
       {analysisResult?.type === 'success' && (
         <div className="bg-green-100 text-green-800 p-3 rounded mt-4 text-sm">

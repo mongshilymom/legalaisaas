@@ -15,6 +15,18 @@
     {
       "path": "/api/cron/daily-send",
       "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/update-growth-stats",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/test/payment-scenarios",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/daily/send-growth-email",
+      "schedule": "0 9 * * *"
     }
   ],
   "env": {

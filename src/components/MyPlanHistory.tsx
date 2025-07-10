@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function MyPlanHistory() {
-  const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState<Array<{ oldPlan: string; newPlan: string; changedAt: string }>>([]);
 
   useEffect(() => {
     // TODO: 실제 API 호출로 교체 가능

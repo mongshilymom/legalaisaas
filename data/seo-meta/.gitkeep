@@ -1,0 +1,8 @@
+# SEO Meta Data Storage
+이 디렉토리는 자동 생성된 SEO 메타 데이터 JSON 파일들을 저장합니다.
+
+파일 형식: {page}.{language}.json
+예시:
+- pricing.ko.json
+- terms.en.json
+- about.zh.json
